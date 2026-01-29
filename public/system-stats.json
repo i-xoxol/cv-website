@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-01-29T05:11:52Z",
+  "mac": {
+    "hostname": "Igors-Mac-mini.local",
+    "temp": "0",
+    "disk": "10"
+  },
+  "lenovo": {
+    "hostname": "homelab",
+    "temp": "40.0",
+    "mem_used": "3196",
+    "mem_total": "7854",
+    "disk": "16",
+    "ext_disk": "1"
+  }
+}
