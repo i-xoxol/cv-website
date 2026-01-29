@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-night text-slate-100 antialiased;
+  min-height: 100vh;
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+}
+
+.font-orbitron {
+  font-family: var(--font-orbitron), "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+}
+
+.cyber-grid {
+  background-image: theme("backgroundImage.grid");
+  background-size: 48px 48px;
+}
+
+.glitch {
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 12px rgba(0, 245, 160, 0.6), 0 0 20px rgba(0, 217, 255, 0.45);
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #00f5a0;
+  opacity: 0.85;
+}
+
+.glitch::before {
+  transform: translate(2px, -2px);
+  clip-path: inset(0 0 40% 0);
+  animation: glitchTop 2.3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  transform: translate(-2px, 2px);
+  clip-path: inset(55% 0 0 0);
+  color: #00d9ff;
+  animation: glitchBottom 1.8s infinite linear alternate-reverse;
+}
+
+@keyframes glitchTop {
+  0% {
+    clip-path: inset(0 0 65% 0);
+  }
+  50% {
+    clip-path: inset(10% 0 40% 0);
+  }
+  100% {
+    clip-path: inset(0 0 60% 0);
+  }
+}
+
+@keyframes glitchBottom {
+  0% {
+    clip-path: inset(60% 0 0 0);
+  }
+  50% {
+    clip-path: inset(70% 0 5% 0);
+  }
+  100% {
+    clip-path: inset(55% 0 0 0);
+  }
+}
+
+.terminal {
+  background: rgba(5, 7, 10, 0.8);
+  border: 1px solid rgba(0, 217, 255, 0.25);
+  box-shadow: 0 0 24px rgba(0, 217, 255, 0.1);
+}
+
+.scanline::before {
+  content: "";
+  position: absolute;
+  inset: -40% 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 245, 160, 0.12),
+    transparent
+  );
+  animation: scan 7s linear infinite;
+  pointer-events: none;
+}
