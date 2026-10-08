@@ -1,62 +1,52 @@
-# Interactive CV & Portfolio
+# Interactive CV and Portfolio
 
-A professional portfolio website featuring a modern UI, interactive elements, and a developer-centric "terminal mode" for exploring skills and history.
+A Next.js portfolio with an academic timeline, project details, a contact form, and a terminal-styled hardware monitoring dashboard.
 
-![Project Status](https://img.shields.io/badge/status-live-success.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+## Application guide
 
-## 📸 Overview
+| Path | Purpose |
+| --- | --- |
+| [src/app/page.tsx](src/app/page.tsx) | Portfolio page, timeline, project details, and contact form. |
+| [src/app/terminal/page.tsx](src/app/terminal/page.tsx) | Monitoring dashboard that polls `/system-stats.json`. |
+| [src/app/api/contact/route.ts](src/app/api/contact/route.ts) | Contact-form POST handler using the Gmail API. |
+| [src/app/globals.css](src/app/globals.css) | Global styles and CSS animations. |
+| [public/](public/) | Portfolio assets and the JSON file used by the monitoring page. |
+| [package.json](package.json) | Dependencies and project scripts. |
 
-*(Place screenshots here)*
+The terminal page is a dashboard that displays system statistics.
 
-## ✨ Features
+## Tech stack
 
-- **Dual Mode Interface**: Standard graphical interface and a functional CLI/Terminal mode for geeks.
-- **Interactive Timeline**: Visual history of professional experience.
-- **Project Showcase**: Gallery of projects with tech stack details.
-- **Contact Form**: Integrated with Google Gmail API for direct messaging.
-- **Responsive Design**: Optimized for all devices.
+- Next.js 14 with the App Router and React 18.
+- TypeScript and Tailwind CSS.
+- CSS animations.
+- `googleapis` for the server-side Gmail integration.
 
-## 🛠 Tech Stack
+## Local development
 
-- **Framework**: [Next.js](https://nextjs.org/) (App Router)
-- **Styling**: Tailwind CSS
-- **Animations**: CSS / Framer Motion
-- **Backend**: Node.js API Routes (Gmail integration)
+Use a Node.js environment compatible with the declared Next.js version. The repository contains `package-lock.json` and the standard Next.js development, build, start, and lint scripts.
 
-## 🚀 Getting Started
+```bash
+git clone https://github.com/i-xoxol/cv-website.git
+cd cv-website
+npm ci
+npm run dev
+```
 
-### Prerequisites
+Open the local development URL printed by Next.js. This setup is derived from the repository's manifest and has not been run as part of the documentation review.
 
-- Node.js (v18 or higher)
-- Google Cloud Project with Gmail API enabled (for contact form)
+## Contact-form configuration
 
-### Installation
+The server-side contact route loads `credentials.json` and `token.json` from the directory specified by `GOOGLE_AUTH_PATH`, defaulting to `./auth`. Its credential loader expects the `installed` OAuth-client shape.
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/i-xoxol/cv-website.git
-   cd cv-website
-   ```
+The repository does not contain a credential-generation or authorization helper. Configure the Gmail API and authorized OAuth credentials separately if you intend to use the contact form. The recipient is currently set in the route source; review it when adapting the project.
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+Keep credential files outside public assets and version control. The portfolio pages can be explored separately from contact-form delivery.
 
-3. **Configure Environment**
-   - Copy `.env.example` to `.env`
-   - Set up Google OAuth credentials:
-     1. Create a `credentials.json` from Google Cloud Console.
-     2. Generate a `token.json` (requires initial local auth flow).
-     3. Place these in an `auth/` directory and set `GOOGLE_AUTH_PATH` in `.env`.
+## Monitoring page
 
-4. **Run Development Server**
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) with your browser.
+The terminal route polls `/system-stats.json` every 30 seconds. The repository includes that JSON asset, but does not include its external collection/update pipeline. Data freshness depends on how that file is maintained.
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The repository includes the [MIT License](LICENSE).
