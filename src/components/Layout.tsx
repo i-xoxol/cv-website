@@ -73,6 +73,9 @@ export function PageShell({
 }) {
   return (
     <>
+      <a className="skip-link" href="#main">
+        {ui[locale].skip}
+      </a>
       <SiteHeader locale={locale} page={page} altHref={altHref} />
       <main id="main" tabIndex={-1}>
         {children}

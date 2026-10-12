@@ -56,9 +56,6 @@ export default function SiteHeader({ locale, page, altHref }: { locale: Locale; 
 
   return (
     <header className="site-header">
-      <a className="skip-link" href="#main">
-        {t.skip}
-      </a>
       <div className="wrap site-header__bar">
         <a className="wordmark" href={home} aria-current={onHome ? "page" : undefined}>
           {locale === "uk" ? "Ігор Хохлов" : "Igor Khokhlov"}

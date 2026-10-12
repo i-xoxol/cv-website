@@ -150,9 +150,10 @@ body.site {
 }
 
 .skip-link {
-  position: absolute;
+  position: fixed;
   left: 12px;
-  top: -60px;
+  top: calc(env(safe-area-inset-top, 0px) + 8px);
+  transform: translateY(-200%);
   z-index: 100;
   padding: 10px 14px;
   background: var(--ink);
@@ -162,7 +163,7 @@ body.site {
 }
 
 .skip-link:focus {
-  top: 12px;
+  transform: none;
 }
 
 .wrap {
@@ -176,7 +177,7 @@ body.site {
 
 .site-header {
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: 50;
   background: color-mix(in srgb, var(--paper) 92%, transparent);
   backdrop-filter: saturate(1.4) blur(10px);
@@ -279,6 +280,7 @@ body.site {
   color: var(--ink);
   font: inherit;
   font-size: 0.95rem;
+  white-space: nowrap;
   cursor: pointer;
 }
 
