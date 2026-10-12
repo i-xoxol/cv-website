@@ -1,25 +1,32 @@
-# Interactive CV and Portfolio
+# Academic website
 
-A Next.js portfolio with an academic timeline, project details, a contact form, and a terminal-styled hardware monitoring dashboard.
+Source for [igor.khokhlov.org](https://igor.khokhlov.org): research, teaching, publications, projects and CV for Igor Khokhlov, in English and Ukrainian. It also hosts a hardware monitoring dashboard at `/terminal`.
 
 ## Application guide
 
 | Path | Purpose |
 | --- | --- |
-| [src/app/page.tsx](src/app/page.tsx) | Portfolio page, timeline, project details, and contact form. |
+| [src/data/](src/data/) | All site content: `publications.ts`, `teaching.ts`, `research.ts`, `projects.ts`, `profile.ts`, and interface text in `ui.ts`. Edit these files to update the site. |
+| [src/views/](src/views/) | Page layouts shared by both languages (home, publications, teaching, CV). |
+| [src/components/](src/components/) | Header with mobile menu, theme toggle, citations, contact form, and the two research graphics. |
+| [src/app/](src/app/) | Next.js routes. English pages live at the root and Ukrainian pages under `/uk`. |
+| [src/middleware.ts](src/middleware.ts) | Sets the page language so `<html lang>` matches the content. |
+| [src/app/api/contact/route.ts](src/app/api/contact/route.ts) | Contact-form POST handler using the Gmail API, with input validation, a honeypot field and rate limiting. |
 | [src/app/terminal/page.tsx](src/app/terminal/page.tsx) | Monitoring dashboard that polls `/system-stats.json`. |
-| [src/app/api/contact/route.ts](src/app/api/contact/route.ts) | Contact-form POST handler using the Gmail API. |
-| [src/app/globals.css](src/app/globals.css) | Global styles and CSS animations. |
-| [public/](public/) | Portfolio assets and the JSON file used by the monitoring page. |
-| [package.json](package.json) | Dependencies and project scripts. |
+| [public/](public/) | Portrait, social card, CV PDF and the JSON file used by the monitoring page. |
 
-The terminal page is a dashboard that displays system statistics.
+### Updating content
+
+Publications are kept in one structured list in `src/data/publications.ts` (id, title, authors, year, venue, type, status, DOI and optional links). Mark up to six entries `featured: true` and list them in `featuredOrder` to show them on the homepage. Titles are never translated.
+
+The downloadable `public/Igor_Khokhlov_CV.pdf` is a print of the `/cv` page. After changing content, regenerate it by opening `/cv` in Chrome and printing to PDF (Letter, default margins, headers and footers off), or with any headless browser.
 
 ## Tech stack
 
 - Next.js 14 with the App Router and React 18.
 - TypeScript and Tailwind CSS.
-- CSS animations.
+- Hand-written CSS with design tokens in `globals.css` (light and dark themes, reduced-motion support). Tailwind remains available and is used by the dashboard page.
+- IBM Plex Sans and Literata through `next/font`.
 - `googleapis` for the server-side Gmail integration.
 
 ## Local development
