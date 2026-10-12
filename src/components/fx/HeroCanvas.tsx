@@ -33,7 +33,7 @@ export default function HeroCanvas() {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.innerWidth < 760;
-    const N = small ? 700 : 1400;
+    const N = small ? 1100 : 2600;
 
     // Even distribution of points on a sphere.
     const pts: Vec[] = [];
@@ -47,7 +47,7 @@ export default function HeroCanvas() {
     // Brighter "continents" from a cheap smooth field, so the globe has texture.
     const glow = pts.map(([x, y, z]) => {
       const v = Math.sin(x * 3.3 + 1.1) * Math.cos(y * 2.6 - 0.5) + Math.sin(z * 4.1 + y * 1.7) * 0.55;
-      return v > 0.15 ? 1 : 0.28;
+      return v > 0.1 ? 1 : 0.45;
     });
 
     let w = 0;
@@ -152,13 +152,45 @@ export default function HeroCanvas() {
       }
       ctx!.restore();
 
+      // Graticule: latitude and longitude lines give the sphere its shape.
+      ctx!.lineWidth = 1;
+      const drawLine = (fn: (k: number) => Vec) => {
+        let prev: [number, number, number] | null = null;
+        for (let k = 0; k <= 64; k++) {
+          const p = project(fn(k / 64));
+          if (prev && (p[2] > 0 || prev[2] > 0)) {
+            const z = Math.max(p[2], prev[2]);
+            ctx!.strokeStyle = `rgba(62,242,255,${0.05 + 0.16 * z})`;
+            ctx!.beginPath();
+            ctx!.moveTo(prev[0], prev[1]);
+            ctx!.lineTo(p[0], p[1]);
+            ctx!.stroke();
+          }
+          prev = p;
+        }
+      };
+      for (let m = 0; m < 12; m++) {
+        const lon = (m / 12) * Math.PI * 2;
+        drawLine((k) => {
+          const lat = -Math.PI / 2 + k * Math.PI;
+          return [Math.cos(lat) * Math.cos(lon), Math.sin(lat), Math.cos(lat) * Math.sin(lon)];
+        });
+      }
+      for (let l = 1; l < 8; l++) {
+        const lat = -Math.PI / 2 + (l / 8) * Math.PI;
+        drawLine((k) => {
+          const lon = k * Math.PI * 2;
+          return [Math.cos(lat) * Math.cos(lon), Math.sin(lat), Math.cos(lat) * Math.sin(lon)];
+        });
+      }
+
       // Globe points, back to front
       for (let i = 0; i < N; i++) {
         const [x, y, z] = project(pts[i]);
         const front = z > 0;
-        const a = front ? 0.28 + 0.72 * z * glow[i] : 0.08 * glow[i];
-        const size = front ? 0.9 + 1.5 * z * glow[i] : 0.7;
-        ctx!.fillStyle = glow[i] > 0.5 ? `rgba(62,242,255,${a})` : `rgba(140,160,210,${a})`;
+        const a = front ? 0.35 + 0.65 * z * glow[i] : 0.1 * glow[i];
+        const size = front ? 1.2 + 1.6 * z * glow[i] : 0.9;
+        ctx!.fillStyle = glow[i] > 0.5 ? `rgba(110,245,255,${a})` : `rgba(150,140,255,${a * 0.8})`;
         ctx!.fillRect(x - size / 2, y - size / 2, size, size);
       }
 
@@ -186,7 +218,7 @@ export default function HeroCanvas() {
             const vis = p[2] > -0.15 ? 1 : 0.25;
             const alpha = (s / steps) * 0.9 * vis * (arc.arrived ? Math.max(0, 1 - arc.arrived / 30) : 1);
             ctx!.strokeStyle = `rgba(${arc.rgb},${alpha})`;
-            ctx!.lineWidth = 1 + (s / steps) * 1.4;
+            ctx!.lineWidth = 1.2 + (s / steps) * 2;
             ctx!.beginPath();
             ctx!.moveTo(prev[0], prev[1]);
             ctx!.lineTo(p[0], p[1]);
@@ -199,7 +231,7 @@ export default function HeroCanvas() {
           ctx!.shadowColor = `rgba(${arc.rgb},0.9)`;
           ctx!.shadowBlur = 12;
           ctx!.beginPath();
-          ctx!.arc(prev[0], prev[1], 2.6, 0, Math.PI * 2);
+          ctx!.arc(prev[0], prev[1], 3.2, 0, Math.PI * 2);
           ctx!.fill();
           ctx!.shadowBlur = 0;
         }
@@ -231,7 +263,7 @@ export default function HeroCanvas() {
       if (!running) return;
       frame++;
       rot += 0.0016;
-      if (now - lastSpawn > (small ? 520 : 340) && arcs.length < (small ? 9 : 16)) {
+      if (now - lastSpawn > (small ? 420 : 240) && arcs.length < (small ? 12 : 22)) {
         spawn();
         lastSpawn = now;
       }
