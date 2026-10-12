@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test:contact": "node --test tests/contact-rate-limit.test.cjs",
     "test:deployment": "python3 -m unittest discover -s deploy/tests -v",
     "package:release": "node scripts/package-release.mjs",
     "test:smoke": "node scripts/smoke.mjs"

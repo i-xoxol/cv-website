@@ -18,12 +18,14 @@ const recent = new Map<string, number[]>();
 function rateLimited(key: string) {
   const now = Date.now();
   const hits = (recent.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
+  // Rejected requests must not grow the history or extend the blocked window.
+  if (hits.length >= MAX_PER_WINDOW) return true;
   hits.push(now);
   recent.set(key, hits);
   if (recent.size > 5000) {
     for (const [k, v] of recent) if (v.every((t) => now - t >= WINDOW_MS)) recent.delete(k);
   }
-  return hits.length > MAX_PER_WINDOW;
+  return false;
 }
 
 async function getAuthClient() {
