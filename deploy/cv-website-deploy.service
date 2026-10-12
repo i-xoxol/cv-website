@@ -1,0 +1,11 @@
+[Unit]
+Description=Deploy tested cv-website GitHub releases
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/apps/cv-website-deploy
+ExecStart=/usr/bin/python3 %h/apps/cv-website-deploy/deploy.py --check
+Environment=PATH=/usr/bin:/bin
+UMask=0077
+NoNewPrivileges=true
+TimeoutStartSec=600

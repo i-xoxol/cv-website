@@ -47,6 +47,14 @@ Keep credential files outside public assets and version control. The portfolio p
 
 The terminal route polls `/system-stats.json` every 30 seconds. The repository includes that JSON asset, but does not include its external collection/update pipeline. Data freshness depends on how that file is maintained.
 
+## Automatic deployment
+
+Pushes to `main` run GitHub checks and publish a tested build as a GitHub
+release. Lenovo fetches successful releases automatically, stages the build,
+and updates the existing PM2 website with health checks and rollback. Visitor
+analytics, server logs and contact credentials stay outside the release files.
+See [the deployment guide](deploy/README.md) for status, pause and rollback commands.
+
 ## License
 
 The repository includes the [MIT License](LICENSE).

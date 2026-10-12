@@ -28,3 +28,9 @@ yarn-error.log*
 auth/
 credentials.json
 token.json
+
+# Release packages and Python caches
+dist/
+__pycache__/
+*.pyc
+*.tsbuildinfo

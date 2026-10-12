@@ -6,11 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test:deployment": "python3 -m unittest discover -s deploy/tests -v",
+    "package:release": "node scripts/package-release.mjs",
+    "test:smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
     "googleapis": "^170.1.0",
-    "next": "14.2.0",
+    "next": "14.2.35",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
@@ -19,8 +23,8 @@
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
     "autoprefixer": "10.4.16",
-    "eslint": "8.56.0",
-    "eslint-config-next": "14.2.0",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.35",
     "postcss": "8.4.33",
     "tailwindcss": "3.4.1",
     "typescript": "5.3.3"
