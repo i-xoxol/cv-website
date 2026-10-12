@@ -10,7 +10,7 @@ export interface CurrentCourse {
 }
 
 const undergraduate: Localized = { en: "Undergraduate", uk: "Бакалаврат" };
-const fall2026: Localized = { en: "Fall 2026", uk: "Осінь 2026" };
+const fall2026: Localized = { en: "Fall 2026", uk: "осінь 2026" };
 
 /** Courses assigned for Fall 2026. Full course repositories are private. */
 export const currentCourses: CurrentCourse[] = [
