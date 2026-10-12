@@ -74,10 +74,17 @@ export default function Effects() {
           seen.add(entry.target);
           const el = entry.target as HTMLElement;
           el.classList.add("is-visible");
-          el.querySelectorAll<HTMLElement>("[data-count]").forEach(countUp);
-          if (el.matches("[data-count]")) countUp(el);
-          el.querySelectorAll<HTMLElement>("[data-scramble]").forEach(scramble);
-          if (el.matches("[data-scramble]")) scramble(el);
+          const run = (sel: string, fn: (x: HTMLElement) => void) => {
+            const targets = [...(el.matches(sel) ? [el] : []), ...Array.from(el.querySelectorAll<HTMLElement>(sel))];
+            for (const x of targets) {
+              if (x !== el && seen.has(x)) continue;
+              seen.add(x);
+              io.unobserve(x);
+              fn(x);
+            }
+          };
+          run("[data-count]", countUp);
+          run("[data-scramble]", scramble);
           io.unobserve(el);
         }
       },

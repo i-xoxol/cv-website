@@ -1,5 +1,6 @@
 import { Citation } from "../components/Citation";
 import PubFilter from "../components/fx/PubFilter";
+import DataRain from "../components/fx/DataRain";
 import { PageShell, Section } from "../components/Layout";
 import { profileLinks } from "../data/profile";
 import { publications, publicationTypeOrder } from "../data/publications";
@@ -14,6 +15,10 @@ export default function PublicationsView({ locale }: { locale: Locale }) {
 
   return (
     <PageShell locale={locale} page="publications" altHref={locale === "en" ? "/uk/publications" : "/publications"}>
+      <div className="page-head-band">
+        <div className="band__backdrop" aria-hidden="true">
+          <DataRain density={0.7} />
+        </div>
       <div className="wrap page-head">
         <p className="eyebrow hero-in" aria-hidden="true">
           {"// "}
@@ -26,6 +31,7 @@ export default function PublicationsView({ locale }: { locale: Locale }) {
           allLabel={t.pub.all}
           options={groups.map((g) => ({ id: g.type, label: t.pub.types[g.type], count: g.items.length }))}
         />
+      </div>
       </div>
 
       {groups.map((g) => (

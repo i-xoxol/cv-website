@@ -13,6 +13,7 @@ export function Section({
   more,
   tint = false,
   stacked = false,
+  backdrop,
   children,
 }: {
   id: string;
@@ -22,10 +23,16 @@ export function Section({
   more?: ReactNode;
   tint?: boolean;
   stacked?: boolean;
+  backdrop?: ReactNode;
   children: ReactNode;
 }) {
   return (
     <section id={id} className={tint ? "band band--tint" : "band"} aria-labelledby={`${id}-title`}>
+      {backdrop && (
+        <div className="band__backdrop" aria-hidden="true">
+          {backdrop}
+        </div>
+      )}
       <div className={stacked ? "wrap section section--stacked" : "wrap section"}>
         <div className="section__head" data-reveal>
           {eyebrow && (
@@ -35,7 +42,9 @@ export function Section({
             </p>
           )}
           <h2 className="section__title" id={`${id}-title`}>
-            {title}
+            <span data-scramble="" data-scramble-ms="900">
+              {title}
+            </span>
           </h2>
           {intro && <p className="section__intro">{intro}</p>}
           {more && <p className="section__more">{more}</p>}

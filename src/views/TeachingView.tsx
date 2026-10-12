@@ -1,3 +1,4 @@
+import DataRain from "../components/fx/DataRain";
 import { PageShell, Section } from "../components/Layout";
 import { EMAIL } from "../data/profile";
 import { currentCourses, mentoring, teachingMethods, teachingPortfolio, teachingStatement } from "../data/teaching";
@@ -8,6 +9,10 @@ export default function TeachingView({ locale }: { locale: Locale }) {
   const t = ui[locale];
   return (
     <PageShell locale={locale} page="teaching" altHref={locale === "en" ? "/uk/teaching" : "/teaching"}>
+      <div className="page-head-band">
+        <div className="band__backdrop" aria-hidden="true">
+          <DataRain density={0.7} />
+        </div>
       <div className="wrap page-head">
         <p className="eyebrow hero-in" aria-hidden="true">
           {"// "}
@@ -15,6 +20,7 @@ export default function TeachingView({ locale }: { locale: Locale }) {
         </p>
         <h1 className="hero-in">{t.teaching.pageTitle}</h1>
         <p className="hero-in">{t.teaching.pageIntro}</p>
+      </div>
       </div>
 
       <Section id="current" eyebrow="fall-2026" title={t.teaching.current} intro={t.teaching.privateNote}>

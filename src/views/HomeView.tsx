@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { Citation, ShortRef } from "../components/Citation";
 import ContactForm from "../components/ContactForm";
 import EntropyChart from "../components/EntropyChart";
+import DataRain from "../components/fx/DataRain";
 import HeroCanvas from "../components/fx/HeroCanvas";
 import Typewriter from "../components/fx/Typewriter";
 import { ArrowIcon, ThemeIcon } from "../components/Icons";
@@ -405,7 +406,7 @@ export default function HomeView({ locale }: { locale: Locale }) {
       </Section>
 
       {/* Contact */}
-      <Section id="contact" eyebrow={fx.eyebrows.contact} title={t.sections.contact}>
+      <Section id="contact" eyebrow={fx.eyebrows.contact} title={t.sections.contact} backdrop={<DataRain density={0.8} />}>
         <div className="contact-grid">
           <div data-reveal="">
             <p className="muted prose">{t.contact.intro}</p>
