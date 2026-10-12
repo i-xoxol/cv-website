@@ -72,7 +72,7 @@ export default function EntropyChart({
           const labelOffset = [0, 8, -8][i];
           return (
             <g key={s.branching}>
-              <path className={`chart__line series-${i + 1}`} d={d} />
+              <path className={`chart__line series-${i + 1}`} d={d} pathLength={1} />
               {s.points.map(([dx, by]) => (
                 <circle key={dx} className={`series-${i + 1}`} cx={x(dx)} cy={y(by)} r={3.2} />
               ))}

@@ -2,10 +2,12 @@ import type { ReactNode } from "react";
 import type { Locale } from "../data/types";
 import { EMAIL, profileLinks } from "../data/profile";
 import { ui } from "../data/ui";
+import Effects from "./fx/Effects";
 import SiteHeader, { type PageKey } from "./SiteHeader";
 
 export function Section({
   id,
+  eyebrow,
   title,
   intro,
   more,
@@ -14,6 +16,7 @@ export function Section({
   children,
 }: {
   id: string;
+  eyebrow?: string;
   title: string;
   intro?: ReactNode;
   more?: ReactNode;
@@ -24,7 +27,13 @@ export function Section({
   return (
     <section id={id} className={tint ? "band band--tint" : "band"} aria-labelledby={`${id}-title`}>
       <div className={stacked ? "wrap section section--stacked" : "wrap section"}>
-        <div className="section__head">
+        <div className="section__head" data-reveal>
+          {eyebrow && (
+            <p className="eyebrow" aria-hidden="true">
+              {"// "}
+              {eyebrow}
+            </p>
+          )}
           <h2 className="section__title" id={`${id}-title`}>
             {title}
           </h2>
@@ -76,11 +85,19 @@ export function PageShell({
       <a className="skip-link" href="#main">
         {ui[locale].skip}
       </a>
+      <div className="backdrop" aria-hidden="true">
+        <div className="backdrop__grid" />
+        <div className="backdrop__orb backdrop__orb--a" />
+        <div className="backdrop__orb backdrop__orb--b" />
+        <div className="backdrop__noise" />
+      </div>
+      <div className="scroll-progress" aria-hidden="true" />
       <SiteHeader locale={locale} page={page} altHref={altHref} />
       <main id="main" tabIndex={-1}>
         {children}
       </main>
       <SiteFooter locale={locale} />
+      <Effects />
     </>
   );
 }

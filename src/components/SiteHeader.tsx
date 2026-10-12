@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Locale } from "../data/types";
 import { localePath, ui } from "../data/ui";
-import ThemeToggle from "./ThemeToggle";
 
 export type PageKey = "home" | "publications" | "teaching" | "cv" | "other";
 
@@ -58,7 +57,10 @@ export default function SiteHeader({ locale, page, altHref }: { locale: Locale; 
     <header className="site-header">
       <div className="wrap site-header__bar">
         <a className="wordmark" href={home} aria-current={onHome ? "page" : undefined}>
-          {locale === "uk" ? "Ігор Хохлов" : "Igor Khokhlov"}
+          <span className="wordmark__mark" aria-hidden="true">
+            IK
+          </span>
+          <span>{locale === "uk" ? "Ігор Хохлов" : "Igor Khokhlov"}</span>
         </a>
         <nav id="site-nav" ref={navRef} className="site-nav" aria-label={t.mainNav} data-open={open ? "true" : "false"}>
           <ul className="nav-list">
@@ -75,7 +77,6 @@ export default function SiteHeader({ locale, page, altHref }: { locale: Locale; 
           <a className="lang-link" href={altHref} hrefLang={locale === "en" ? "uk" : "en"} lang={locale === "en" ? "uk" : "en"} aria-label={t.switchLanguageLabel}>
             {locale === "en" ? "УК" : "EN"}
           </a>
-          <ThemeToggle toDark={t.themeToDark} toLight={t.themeToLight} />
           <button
             ref={buttonRef}
             type="button"

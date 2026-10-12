@@ -44,6 +44,7 @@ export default function CvView({ locale, print = false }: { locale: Locale; prin
   const t = ui[locale];
   const body = (
     <article className="cv">
+      <div className={print ? undefined : "cv__sheet glass"}>
       {!print && (
         <div className="cv__toolbar">
           <a className="button button--primary" href={CV_PDF} download>
@@ -181,6 +182,7 @@ export default function CvView({ locale, print = false }: { locale: Locale; prin
             </div>
           ))}
       </section>
+      </div>
     </article>
   );
 

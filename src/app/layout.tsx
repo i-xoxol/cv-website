@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans, Literata } from "next/font/google";
+import { IBM_Plex_Sans, JetBrains_Mono, Unbounded } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 
@@ -11,9 +11,15 @@ const sans = IBM_Plex_Sans({
   display: "swap",
 });
 
-const serif = Literata({
+const display = Unbounded({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-serif",
+  variable: "--font-display",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -25,22 +31,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafbfc" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e1520" },
-  ],
+  themeColor: "#05070d",
+  colorScheme: "dark",
 };
-
-// Applies a saved theme choice before first paint to avoid a flash.
-const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = headers().get("x-site-lang") === "uk" ? "uk" : "en";
   return (
-    <html lang={lang} className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
+    <html lang={lang} className={`${sans.variable} ${display.variable} ${mono.variable}`}>
       <body className="site">{children}</body>
     </html>
   );
