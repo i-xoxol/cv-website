@@ -813,6 +813,7 @@ main:focus {
 
 .badge__frame {
   position: relative;
+  overflow: hidden;
   border-radius: 22px;
   padding: 2px;
   background: conic-gradient(from var(--angle, 0deg), var(--cyan), var(--violet), #1b2440 40%, var(--cyan) 60%, #1b2440 80%, var(--cyan));
@@ -1685,6 +1686,18 @@ text.series-3 {
 
 .theme--wide {
   grid-column: 1 / -1;
+}
+
+.bento > *,
+.course-grid > *,
+.term-grid > *,
+.method-grid > * {
+  min-width: 0;
+}
+
+.theme__top .tag {
+  white-space: normal;
+  max-width: 100%;
 }
 
 .theme {
