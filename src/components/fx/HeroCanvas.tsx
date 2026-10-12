@@ -74,7 +74,7 @@ export default function HeroCanvas() {
       canvas!.height = Math.round(h * dpr);
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
       R = Math.min(w, h) * (small ? 0.42 : 0.4);
-      cx = w * (small ? 0.62 : 0.66);
+      cx = w * (small ? 0.62 : 0.7);
       cy = h * (small ? 0.62 : 0.44);
     }
 
