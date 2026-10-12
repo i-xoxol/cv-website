@@ -73,9 +73,9 @@ export default function HeroCanvas() {
       canvas!.width = Math.round(w * dpr);
       canvas!.height = Math.round(h * dpr);
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
-      R = Math.min(w, h) * (small ? 0.4 : 0.36);
-      cx = w * (small ? 0.5 : 0.7);
-      cy = h * (small ? 0.42 : 0.48);
+      R = Math.min(w, h) * (small ? 0.42 : 0.4);
+      cx = w * (small ? 0.62 : 0.66);
+      cy = h * (small ? 0.62 : 0.44);
     }
 
     function project(p: Vec): [number, number, number] {
@@ -156,8 +156,8 @@ export default function HeroCanvas() {
       for (let i = 0; i < N; i++) {
         const [x, y, z] = project(pts[i]);
         const front = z > 0;
-        const a = front ? 0.22 + 0.7 * z * glow[i] : 0.06 * glow[i];
-        const size = front ? 0.6 + 1.1 * z * glow[i] : 0.6;
+        const a = front ? 0.28 + 0.72 * z * glow[i] : 0.08 * glow[i];
+        const size = front ? 0.9 + 1.5 * z * glow[i] : 0.7;
         ctx!.fillStyle = glow[i] > 0.5 ? `rgba(62,242,255,${a})` : `rgba(140,160,210,${a})`;
         ctx!.fillRect(x - size / 2, y - size / 2, size, size);
       }
