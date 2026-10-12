@@ -1,35 +1,47 @@
-import type { Metadata } from "next";
-import { Orbitron, Share_Tech_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { IBM_Plex_Sans, Literata } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  variable: "--font-orbitron",
+const sans = IBM_Plex_Sans({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-sans",
   display: "swap",
 });
 
-const shareTech = Share_Tech_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  weight: "400",
+const serif = Literata({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-serif",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Dr. Igor Khokhlov | Cybersecurity",
-  description: "Assistant Professor of Cybersecurity - Academic CV",
+  metadataBase: new URL("https://igor.khokhlov.org"),
+  title: "Dr. Igor Khokhlov | Cybersecurity, Sacred Heart University",
+  description: "Assistant Professor of Cybersecurity at Sacred Heart University.",
+  icons: { icon: "/icon.svg" },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafbfc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1520" },
+  ],
+};
+
+// Applies a saved theme choice before first paint to avoid a flash.
+const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const lang = headers().get("x-site-lang") === "uk" ? "uk" : "en";
   return (
-    <html lang="en">
-      <body className={`${orbitron.variable} ${shareTech.variable} font-sans bg-night`}>
-        {children}
-      </body>
+    <html lang={lang} className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="site">{children}</body>
     </html>
   );
 }

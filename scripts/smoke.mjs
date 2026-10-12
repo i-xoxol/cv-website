@@ -40,6 +40,12 @@ try {
   const assets = [...new Set([...html.matchAll(/(?:src|href)="([^" ]*\/_next\/static\/[^" ]+)"/g)].map(m => m[1]))];
   assert.ok(assets.length >= 3, 'Expected bundled scripts and styles');
   for (const path of assets) assert.equal((await get(path)).status, 200, path);
+  assert.match(html, /<html lang="en"/);
+  assert.match(html, /10\.5220\/0014610100004061/, 'Featured G.H.O.S.T. citation is rendered');
+  for (const path of ['/publications', '/teaching', '/cv', '/uk', '/uk/publications', '/uk/teaching', '/uk/cv', '/sitemap.xml', '/robots.txt']) {
+    assert.equal((await get(path)).status, 200, path);
+  }
+  assert.match(await (await get('/uk')).text(), /<html lang="uk"/);
   const pdf = await get('/Igor_Khokhlov_CV.pdf');
   assert.equal(pdf.status, 200);
   assert.equal(Buffer.from(await pdf.arrayBuffer()).subarray(0, 4).toString(), '%PDF');
@@ -53,7 +59,7 @@ try {
   });
   assert.equal(contact.status, 400);
   assert.deepEqual(await contact.json(), { error: 'Missing fields' });
-  console.log(`Smoke checks passed for ${manifest.commit}: homepage, ${assets.length} assets, CV, dashboard, health, contact validation.`);
+  console.log(`Smoke checks passed for ${manifest.commit}: homepage, subpages in both languages, ${assets.length} assets, CV, dashboard, health, contact validation.`);
 } finally {
   child.kill();
   await Promise.race([new Promise(r => child.once('exit', r)), delay(5000)]);

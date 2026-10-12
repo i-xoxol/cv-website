@@ -1,0 +1,295 @@
+import type { Locale } from "./types";
+
+const en = {
+  skip: "Skip to content",
+  nav: {
+    about: "About",
+    research: "Research",
+    teaching: "Teaching",
+    publications: "Publications",
+    projects: "Projects",
+    cv: "CV",
+    contact: "Contact",
+  },
+  menu: "Menu",
+  closeMenu: "Close menu",
+  mainNav: "Main navigation",
+  switchLanguage: "Українська",
+  switchLanguageLabel: "Читати українською",
+  themeToDark: "Switch to dark theme",
+  themeToLight: "Switch to light theme",
+  cta: {
+    research: "View research",
+    teaching: "Explore teaching",
+    publications: "View publications",
+    cv: "Download CV",
+    allPublications: "All publications",
+    allTeaching: "Teaching portfolio and mentoring",
+    htmlCv: "Read the CV online",
+  },
+  emailLabel: "Email",
+  hero: {
+    figureCaption:
+      "How G.H.O.S.T. hides a recipient: one real message (highlighted) travels through a tree of decoy deliveries. This sketch shows branching 3 and depth 4, which makes 81 deliveries.",
+    figureTitle: "Decoy routing tree with one real route",
+  },
+  featured: {
+    heading: "Recent publication",
+    entropyTitle: "Recipient entropy in simulation",
+    entropyCaption:
+      "Shannon entropy of the apparent recipient set, by routing depth and branching factor, from the public simulation results (1,000 simulated recipients, 1,000 runs per setting). The dashed line is the maximum possible, log₂ 1000 ≈ 9.97 bits.",
+    depth: "Routing depth",
+    bits: "bits",
+    branching: "Branching",
+  },
+  sections: {
+    teaching: "Teaching",
+    teachingIntro: "Courses I am teaching in Fall 2026.",
+    publications: "Selected publications",
+    publicationsIntro: "Six papers that represent the main lines of my research. The full list is organized by year and type.",
+    research: "Research",
+    researchIntro: "Each theme below lists the question, the method, what has come out of it so far and where it stands.",
+    projects: "Code and research artifacts",
+    projectsIntro: "Public repositories, described by what they actually contain.",
+    grants: "Grants and sponsored research",
+    mentoring: "Student mentoring",
+    talks: "Talks and service",
+    experience: "Academic and professional experience",
+    education: "Education",
+    personal: "Outside work",
+    contact: "Contact",
+    profiles: "Profiles",
+  },
+  research: {
+    question: "Question",
+    method: "Method",
+    output: "Outputs",
+    related: "Related papers",
+    status: {
+      published: "Published",
+      ongoing: "Ongoing",
+      "in-progress": "Work in progress",
+    },
+  },
+  pub: {
+    doi: "DOI",
+    publisher: "Publisher page",
+    pdf: "PDF",
+    code: "Code and data",
+    preprint: "Preprint",
+    types: {
+      journal: "Journal articles",
+      conference: "Conference papers",
+      preprint: "Preprints",
+      dissertation: "Dissertation",
+      report: "Reports",
+    },
+    typeSingular: {
+      journal: "Journal article",
+      conference: "Conference paper",
+      preprint: "Preprint",
+      dissertation: "Dissertation",
+      report: "Report",
+    },
+    count: (n: number) => (n === 1 ? "1 item" : `${n} items`),
+    pageTitle: "Publications",
+    pageIntro:
+      "Journal articles, conference papers and other scholarly work, newest first. Titles link to the publisher through their DOI where one exists.",
+    filterLabel: "Show",
+    all: "All",
+    source: "Metadata checked against Crossref records, October 2026.",
+  },
+  teaching: {
+    pageTitle: "Teaching",
+    pageIntro:
+      "Undergraduate and graduate courses in computing and cybersecurity at Sacred Heart University, with supervision of research, capstone and thesis students.",
+    current: "Current courses, Fall 2026",
+    approach: "How I teach",
+    portfolio: "Teaching portfolio",
+    portfolioNote:
+      "Courses I have taught or supervised. Not every course is offered every term; check the university catalog for current offerings.",
+    publicMaterials: "Public material",
+    privateNote:
+      "Full course materials are shared with enrolled students through the university's systems; the descriptions here summarize each course.",
+    mentoringKinds: "Kinds of supervision",
+  },
+  contact: {
+    intro: "The quickest way to reach me is by email. You can also use the form, which sends a message to my inbox.",
+    name: "Your name",
+    email: "Your email",
+    message: "Message",
+    send: "Send message",
+    sending: "Sending…",
+    sent: "Message sent. I will reply by email.",
+    failed: "The message could not be sent. Please email me directly instead.",
+    invalid: "Check the highlighted fields and try again.",
+  },
+  cv: {
+    pageTitle: "Curriculum vitae",
+    updated: "Updated October 2026",
+    download: "Download PDF",
+    selectedPubs: "Publications",
+    teachingLine: "Teaching",
+  },
+  footer: {
+    note: "Built and maintained by Igor Khokhlov.",
+  },
+  meta: {
+    homeTitle: "Dr. Igor Khokhlov | Cybersecurity, Sacred Heart University",
+    homeDescription:
+      "Igor Khokhlov is an Assistant Professor of Cybersecurity at Sacred Heart University. Research on AI for security, data quality, mobile and IoT security, and metadata-resistant messaging; courses, publications and CV.",
+  },
+};
+
+export type UiStrings = typeof en;
+
+const uk: UiStrings = {
+  skip: "Перейти до змісту",
+  nav: {
+    about: "Про мене",
+    research: "Дослідження",
+    teaching: "Викладання",
+    publications: "Публікації",
+    projects: "Проєкти",
+    cv: "CV",
+    contact: "Контакти",
+  },
+  menu: "Меню",
+  closeMenu: "Закрити меню",
+  mainNav: "Головна навігація",
+  switchLanguage: "English",
+  switchLanguageLabel: "Read in English",
+  themeToDark: "Увімкнути темну тему",
+  themeToLight: "Увімкнути світлу тему",
+  cta: {
+    research: "Дослідження",
+    teaching: "Викладання",
+    publications: "Публікації",
+    cv: "Завантажити CV",
+    allPublications: "Усі публікації",
+    allTeaching: "Викладання та наставництво",
+    htmlCv: "Переглянути CV онлайн",
+  },
+  emailLabel: "Email",
+  hero: {
+    figureCaption:
+      "Як G.H.O.S.T. приховує отримувача: одне справжнє повідомлення (виділене) проходить деревом маскувальних доставок. Ескіз показує розгалуження 3 і глибину 4, тобто 81 доставку.",
+    figureTitle: "Дерево маскувальної маршрутизації з одним справжнім маршрутом",
+  },
+  featured: {
+    heading: "Нова публікація",
+    entropyTitle: "Ентропія отримувача в симуляції",
+    entropyCaption:
+      "Ентропія Шеннона для множини ймовірних отримувачів залежно від глибини маршрутизації та розгалуження, за публічними результатами симуляцій (1000 отримувачів, 1000 запусків на конфігурацію). Пунктир показує максимум, log₂ 1000 ≈ 9,97 біта.",
+    depth: "Глибина маршрутизації",
+    bits: "біт",
+    branching: "Розгалуження",
+  },
+  sections: {
+    teaching: "Викладання",
+    teachingIntro: "Курси, які я викладаю восени 2026 року.",
+    publications: "Вибрані публікації",
+    publicationsIntro: "Шість статей, що представляють основні напрями моїх досліджень. Повний список упорядковано за роками та типами.",
+    research: "Дослідження",
+    researchIntro: "Для кожного напряму вказано питання, метод, отримані результати та поточний стан.",
+    projects: "Код і дослідницькі артефакти",
+    projectsIntro: "Публічні репозиторії з описом того, що вони насправді містять.",
+    grants: "Гранти та спонсоровані дослідження",
+    mentoring: "Наставництво студентів",
+    talks: "Виступи та громадська діяльність",
+    experience: "Академічний і професійний досвід",
+    education: "Освіта",
+    personal: "Поза роботою",
+    contact: "Контакти",
+    profiles: "Профілі",
+  },
+  research: {
+    question: "Питання",
+    method: "Метод",
+    output: "Результати",
+    related: "Пов'язані статті",
+    status: {
+      published: "Опубліковано",
+      ongoing: "Триває",
+      "in-progress": "Робота триває",
+    },
+  },
+  pub: {
+    doi: "DOI",
+    publisher: "Сторінка видавця",
+    pdf: "PDF",
+    code: "Код і дані",
+    preprint: "Препринт",
+    types: {
+      journal: "Статті в журналах",
+      conference: "Конференційні статті",
+      preprint: "Препринти",
+      dissertation: "Дисертація",
+      report: "Звіти",
+    },
+    typeSingular: {
+      journal: "Стаття в журналі",
+      conference: "Конференційна стаття",
+      preprint: "Препринт",
+      dissertation: "Дисертація",
+      report: "Звіт",
+    },
+    count: (n: number) => `${n}`,
+    pageTitle: "Публікації",
+    pageIntro:
+      "Статті в журналах, конференційні статті та інші наукові праці, від найновіших. Назви ведуть на сторінку видавця через DOI, якщо він є. Назви праць подано мовою оригіналу.",
+    filterLabel: "Показати",
+    all: "Усі",
+    source: "Метадані звірено із записами Crossref, жовтень 2026.",
+  },
+  teaching: {
+    pageTitle: "Викладання",
+    pageIntro:
+      "Бакалаврські та магістерські курси з комп'ютерних наук і кібербезпеки в Sacred Heart University, а також керівництво дослідницькими, капстоун- та дипломними роботами студентів.",
+    current: "Поточні курси, осінь 2026",
+    approach: "Як я викладаю",
+    portfolio: "Викладацький досвід",
+    portfolioNote:
+      "Курси, які я викладав або якими керував. Не всі курси пропонуються щосеместру; актуальний перелік дивіться в каталозі університету.",
+    publicMaterials: "Публічні матеріали",
+    privateNote:
+      "Повні матеріали курсів доступні зарахованим студентам через університетські системи; тут подано стислі описи курсів.",
+    mentoringKinds: "Види керівництва",
+  },
+  contact: {
+    intro: "Найшвидше зі мною можна зв'язатися електронною поштою. Також можна скористатися формою, яка надсилає повідомлення на мою пошту.",
+    name: "Ваше ім'я",
+    email: "Ваш email",
+    message: "Повідомлення",
+    send: "Надіслати повідомлення",
+    sending: "Надсилання…",
+    sent: "Повідомлення надіслано. Я відповім електронною поштою.",
+    failed: "Не вдалося надіслати повідомлення. Будь ласка, напишіть мені напряму.",
+    invalid: "Перевірте виділені поля та спробуйте ще раз.",
+  },
+  cv: {
+    pageTitle: "Резюме (CV)",
+    updated: "Оновлено в жовтні 2026",
+    download: "Завантажити PDF",
+    selectedPubs: "Публікації",
+    teachingLine: "Викладання",
+  },
+  footer: {
+    note: "Сайт створює та підтримує Ігор Хохлов.",
+  },
+  meta: {
+    homeTitle: "Д-р Ігор Хохлов | Кібербезпека, Sacred Heart University",
+    homeDescription:
+      "Ігор Хохлов, асистент-професор з кібербезпеки в Sacred Heart University. Дослідження ШІ для безпеки, якості даних, безпеки мобільних та IoT-систем і месенджерів, стійких до аналізу метаданих; курси, публікації та CV.",
+  },
+};
+
+export const ui: Record<Locale, UiStrings> = { en, uk };
+
+/** Path prefix for each locale. English lives at the root. */
+export const localePrefix: Record<Locale, string> = { en: "", uk: "/uk" };
+
+export function localePath(locale: Locale, path: string) {
+  const clean = path === "/" ? "" : path;
+  return `${localePrefix[locale]}${clean}` || "/";
+}
