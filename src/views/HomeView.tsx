@@ -86,6 +86,10 @@ export default function HomeView({ locale }: { locale: Locale }) {
               <a className="button" href={localePath(locale, "/publications")}>
                 {t.cta.publications}
               </a>
+              <a className="button" href="https://github.com/i-xoxol">
+                GitHub
+                <ArrowIcon />
+              </a>
               <a className="button button--ghost" href={CV_PDF} download>
                 <DownloadIcon />
                 {t.cta.cv}
