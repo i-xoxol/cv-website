@@ -57,7 +57,7 @@ The terminal route polls `/system-stats.json` every 30 seconds. The repository i
 ## Automatic deployment
 
 Pushes to `main` run GitHub checks and publish a tested build as a GitHub
-release. Lenovo fetches successful releases automatically, stages the build,
+release. The production VPS fetches successful releases automatically, stages the build,
 and updates the existing PM2 website with health checks and rollback. Visitor
 analytics, server logs and contact credentials stay outside the release files.
 See [the deployment guide](deploy/README.md) for status, pause and rollback commands.

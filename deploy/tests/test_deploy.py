@@ -147,5 +147,28 @@ class RollbackTests(unittest.TestCase):
         self.assertEqual(controller.state['failed_releases']['new'], 'Manual rollback')
 
 
+class ListenerTests(unittest.TestCase):
+    def test_proxy_only_listener_and_existing_lan_default(self):
+        for listen_host in (None, '127.0.0.1'):
+            with self.subTest(listen_host=listen_host), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                (root / 'shared').mkdir()
+                (root / 'shared/environment.json').write_text('{}')
+                state = {'current': {'tag': 'old'}}
+                if listen_host is not None:
+                    state['listen_host'] = listen_host
+                (root / 'state.json').write_text(json.dumps(state))
+                controller = deploy.Deployer(root)
+                target = dict(tag=TAG, commit=COMMIT, directory=str(root / 'release'))
+                with patch.object(deploy.subprocess, 'run') as command:
+                    controller.restart(target)
+                config = json.loads((root / 'process.json').read_text())['apps'][0]
+                self.assertEqual(config['env']['HOSTNAME'], listen_host or '0.0.0.0')
+                self.assertEqual(config['env']['PORT'], '3005')
+                self.assertEqual(config['name'], 'cv-website')
+                self.assertEqual(command.call_args_list[0].args[0], ['/usr/bin/pm2', 'delete', 'cv-website'])
+                self.assertIn('--only', command.call_args_list[1].args[0])
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -123,7 +123,7 @@ class Deployer:
         root = Path(target['directory']).resolve()
         process = {
             'name': 'cv-website', 'cwd': str(root), 'exec_mode': 'fork', 'instances': 1,
-            'env': {k: v for k, v in self.environment_for(target, 3005, '0.0.0.0').items()
+            'env': {k: v for k, v in self.environment_for(target, 3005, self.state.get('listen_host', '0.0.0.0')).items()
                     if k in self.environment or k in {'PORT', 'HOSTNAME', 'NODE_ENV', 'DEPLOYMENT_COMMIT', 'DEPLOYMENT_RELEASE'}},
             'out_file': str(Path.home() / '.pm2/logs/cv-website-out.log'),
             'error_file': str(Path.home() / '.pm2/logs/cv-website-error.log'),
