@@ -5,7 +5,7 @@ Run `npm ci`, `npm run lint`, `npm run typecheck`, `npm run test:deployment`,
 Deployment tests require Python 3; use the Python executable available locally.
 
 Pushes to `main` run `.github/workflows/release.yml`. After all checks pass,
-GitHub publishes an immutable build artifact in a `deploy-*` release. Lenovo
+GitHub publishes an immutable build artifact in a `deploy-*` release. The server
 polls every two minutes and stages that exact tested build before switching PM2.
 Pull requests run the same checks without publishing a release.
 
